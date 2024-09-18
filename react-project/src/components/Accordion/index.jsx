@@ -8,20 +8,47 @@ export default function Accordion() {
         setSelected(currentId === selected ? null : currentId)
         console.log(selected)
     }
+
+    const [enableMultiSelection , setEnableMultiSelection] = useState(false);
+    const [multiple , setMultiple] = useState([]);
+    function handleMultiSelection(currentId){
+      let copyMultiple = [...multiple]
+      const findIndexOfCurrentId = copyMultiple.indexOf(currentId)
+      console.log(findIndexOfCurrentId)
+      if(findIndexOfCurrentId === -1){
+        copyMultiple.push(currentId)
+        console.log(copyMultiple)
+      } else {
+        copyMultiple.splice(findIndexOfCurrentId, 1)
+        console.log(copyMultiple)
+      }
+      setMultiple(copyMultiple)
+    }
+
+
   return (
     <div className="wrapper">
+        <button onClick={ ()=> setEnableMultiSelection(!enableMultiSelection)}>Enable Multi Selection</button>
       <div className="accordion">
         {DATA && DATA.length > 0 ? (
           DATA.map((item) => (
             <div className="item" key={item.id}>
-              <div onClick={()=> handleClick(item.id) } className="title">
+              <div onClick={enableMultiSelection ? 
+                ()=>handleMultiSelection(item.id) : 
+                ()=> handleClick(item.id) } 
+                className="title">
                 <h3>{item.question}</h3>
                 <span>+</span>
               </div>
-              {selected === item.id ? 
+              {
+                enableMultiSelection ? multiple.includes(item.id)&&<div className="content">{item.answer}</div>
+                : selected === item.id && <div className="content">{item.answer}</div>
+                  
+              }
+              {/* {selected === item.id ? 
                <div className="content">{item.answer}</div>
                : null
-            }
+            } */}
             </div>
           ))
         ) : (
