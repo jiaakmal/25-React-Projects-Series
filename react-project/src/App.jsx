@@ -6,7 +6,7 @@ import StarRating from './components/StarRating';
 import ImageSlider from './components/ImageSlider';
 import LoadMoreProducts from './components/Load-more-projects';
 import QrCodeGenerator from './components/qr-code-generator';
-
+import LightDarkMode from './components/Light-Dark-Mode';
 function App() {
   
 
@@ -17,7 +17,8 @@ function App() {
      {/* <StarRating noOfStars={10}/> */}
      {/* <ImageSlider url={"https://picsum.photos/v2/list"} page={"1"} limit={"10"}/> */}
      {/* <LoadMoreProducts/> */}
-     <QrCodeGenerator/>
+     {/* <QrCodeGenerator/> */}
+     <LightDarkMode/>
   </>
    
   
